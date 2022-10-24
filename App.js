@@ -1,20 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { useColorScheme } from "react-native"; // detecta qual o tema do celular do usuário
+import Home from './src/Home';
+
+import {ThemeProvider} from 'styled-components';
+import themes from "./src/themes";
 
 export default function App() {
+  // ao ver o tema do usuário ele pode devolver (dark, light, null, undefined)
+  const deviceTheme = useColorScheme();
+
+  // console.log(); usado para devolver (mostrar) o que for colocado dentro do parenteses
+  
+  const theme = themes[deviceTheme] || theme.dark
+  
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider theme={theme}>
+    <Home/>
+    </ThemeProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
